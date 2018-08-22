@@ -1,11 +1,12 @@
 import os
-from flask import Flask
-app = Flask('report-service')
 
-@app.route('/')
-def gelReport():
-    return 'Hello server!'
+from report import service
 
+__author__ = "Paulo Silva"
+__version__ = "1.0.0"
+__email__ = "paulosilvadev3@gmail.com"
+
+app = service(os.environ.get('API_ENV'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host=os.environ.get('URL_SERVICE_REPORT'), port=os.environ.get('PORT_SERVICE_REPORT'))
+    app.run(host=os.environ.get('URL_SERVICE_REPORT'), port=os.environ.get('PORT_SERVICE_REPORT'))
