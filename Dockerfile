@@ -19,4 +19,4 @@ RUN pip3 install -r requirements.txt
 
 RUN chown -R app:app /home/app/*
 
-CMD ["python","app.py"]
+CMD ["python3","-u","app.py"]
