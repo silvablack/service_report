@@ -32,6 +32,7 @@ requirements = [
     'typed-ast',
     'Werkzeug',
     'wrapt',
+    'uWSGI',
 ]
 
 setup(
