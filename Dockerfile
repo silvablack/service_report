@@ -1,22 +1,22 @@
-FROM ubuntu:latest
+FROM python:3-alpine
 
-RUN useradd --user-group --create-home app
+RUN apk add --virtual .build_dependencies \
+            --no-cache \
+            python3-dev \
+            build-base \
+            linux-headers \
+            pcre-dev
 
-USER root
+RUN apk add --no-cache pcre
 
-RUN apt-get update -y
+WORKDIR /app
 
-RUN apt-get install -y  python3-pip python3-dev build-essential
+COPY . /app
 
-COPY . /home/app
+COPY ./requirements.txt /app
 
-USER app
+RUN pip install -r /app/requirements.txt
 
-WORKDIR /home/app
+RUN apk del .build_dependencies && rm -rf /var/cache/apk/*
 
-USER root
-RUN pip3 install -r requirements.txt
-
-RUN chown -R app:app /home/app/*
-
-CMD ["python3","-u","app.py"]
+CMD ["uwsgi", "--ini", "/app/wsgi.ini"]
