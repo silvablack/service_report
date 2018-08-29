@@ -67,7 +67,7 @@ class SearchComplainsByCity(object):
             }
         else:
             data = {
-                'error': 'NO DATA COMPANY'
+                'info': 'NO DATA COMPANY'
             }    
 
         return json.dumps(data)
