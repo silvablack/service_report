@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import json
 from flask import Flask,request, abort, jsonify, Response
 from config import app_config
 from report.controllers import ReportController
@@ -20,9 +20,7 @@ def service(env_name):
             'title': 'Report Service',
             'version': '1.0.0'
         }
-        response = jsonify(info)
-        response.status_code = 200
-        return response
+        return Response(json.dumps(info),status=200,mimetype="application/json; charset=utf-8")
 
     @app.route('/report',methods=['GET'])
     def report():
